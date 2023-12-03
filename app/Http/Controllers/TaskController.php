@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Team;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
-class TeamController extends Controller
+class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Team::with('company')->paginate(2);
+        return Task::with('team')->with('customer')->paginate(2);
     }
 
     /**
@@ -20,15 +20,15 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        return response(Team::create($request->all()), 201);
+        return response(Task::create($request->all()), 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Task $task)
     {
-        //
+        return $task->with('customer')->with('team')->get();
     }
 
     /**
