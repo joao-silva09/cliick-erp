@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -12,13 +13,13 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return Task::with('team')->with('customer')->paginate(2);
+        return Task::with('team')->with('customer')->paginate(10);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
         return response(Task::create($request->all()), 201);
     }
