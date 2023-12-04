@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TeamRequest;
 use App\Models\Team;
 use Illuminate\Http\Request;
 
@@ -12,13 +13,13 @@ class TeamController extends Controller
      */
     public function index()
     {
-        return Team::with('company')->paginate(2);
+        return Team::with('company')->paginate(10);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TeamRequest $request)
     {
         return response(Team::create($request->all()), 201);
     }
