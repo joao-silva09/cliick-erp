@@ -12,7 +12,7 @@ class CompanyController extends Controller
      */
     public function index(Request $request)
     {
-        $companies = Company::with('customers')->with('teams')->paginate(2);
+        $companies = Company::with('customers')->with('teams.tasks')->paginate(2);
         return $companies;
     }
 

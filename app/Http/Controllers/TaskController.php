@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
+use App\Http\Resources\TaskCollection;
+use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return Task::with('team')->with('customer')->paginate(10);
+        $tasks = Task::with('team')->with('customer')->paginate(10);
+
+        return new TaskCollection($tasks);
     }
 
     /**

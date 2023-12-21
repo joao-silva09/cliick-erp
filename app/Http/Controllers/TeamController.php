@@ -13,7 +13,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        return Team::with('company')->paginate(10);
+        return Team::with('company')->with('tasks')->paginate(10);
     }
 
     /**

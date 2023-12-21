@@ -21,4 +21,9 @@ class Company extends Model
     {
         return $this->hasMany(Team::class);
     }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
 }
