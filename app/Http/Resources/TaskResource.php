@@ -20,8 +20,8 @@ class TaskResource extends JsonResource
             'description' => $this->description,
             'deadline' => $this->deadline,
             'status' => $this->status,
-            'team' => $this->team,
+            // 'team' => new TeamResource($this->team),
             'customer' => new CustomerResource($this->customer),
-        ];;
+        ];
     }
 }
