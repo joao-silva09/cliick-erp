@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TeamRequest;
+use App\Http\Resources\TeamCollection;
 use App\Models\Team;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,9 @@ class TeamController extends Controller
      */
     public function index()
     {
-        return Team::with('company')->with('tasks')->paginate(10);
+        $teams = Team::with('company')->with('tasks')->paginate(10);
+
+        return new TeamCollection($teams);
     }
 
     /**
