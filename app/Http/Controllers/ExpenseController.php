@@ -42,7 +42,7 @@ class ExpenseController extends Controller
      */
     public function show(Expense $expense)
     {
-        return $expense->with('company')->first();
+        return $expense->with('company')->get();
     }
 
     /**
