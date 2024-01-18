@@ -17,7 +17,7 @@ class CustomerController extends Controller
     {
         $customers = Customer::with('company')->paginate(2);
         
-        return new CustomerCollection($customers);
+        return CustomerResource::collection($customers);
     }
 
     /**

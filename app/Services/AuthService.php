@@ -27,7 +27,7 @@ class AuthService
         ];
     }
 
-    public function register(string $firstName, string $lastName, string $email, string $password)
+    public function register(string $firstName, string $lastName, string $email, string $password, string $companyId)
     {
         $user = User::where('email', $email)->exists();
         if (!empty($user)) {
@@ -39,6 +39,7 @@ class AuthService
             'first_name' => $firstName,
             'last_name' => $lastName,
             'email' => $email,
+            'company_id' => $companyId,
             'password' => $userPassword,
             'confirmation_token' => Str::random(60),
         ]);

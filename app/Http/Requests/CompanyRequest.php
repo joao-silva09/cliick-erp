@@ -24,7 +24,7 @@ class CompanyRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'between:2,200'],
             'email' => ['string', 'email'],
-            'banlance' => ['required', 'numeric'],
+            'balance' => ['required', 'numeric'],
         ];
     }
 }

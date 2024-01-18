@@ -26,6 +26,7 @@ class AuthRegisterRequest extends FormRequest
             'last_name' => ['string', 'nullable'],
             'email' => ['string', 'required', 'email'],
             'password' => ['string', 'required', 'min:6', 'max:30'],
+            'company_id' => ['required', 'int', 'exists:companies,id'],
         ];
     }
 }
