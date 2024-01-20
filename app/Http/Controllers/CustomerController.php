@@ -15,7 +15,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::with('company')->paginate(2);
+        $customers = Customer::get();
         
         return CustomerResource::collection($customers);
     }
