@@ -17,7 +17,7 @@ class TaskController extends Controller
     {
         $tasks = Task::with('team')->with('customer')->paginate(10);
 
-        return new TaskCollection($tasks);
+        return TaskResource::collection($tasks);
     }
 
     /**
