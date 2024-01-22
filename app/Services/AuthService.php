@@ -45,6 +45,7 @@ class AuthService
             'last_name' => $lastName,
             'email' => $email,
             'password' => $userPassword,
+            'company_id' => 1,
             'confirmation_token' => Str::random(60),
         ]);
 
