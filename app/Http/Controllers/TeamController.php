@@ -15,7 +15,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Team::with('company')->with('tasks')->paginate(10);
+        $teams = Team::with('company')->get();
 
         return TeamResource::collection($teams);
     }

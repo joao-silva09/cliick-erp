@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DemandController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\MeController;
 use App\Http\Controllers\TaskController;
@@ -30,6 +31,7 @@ Route::post('login', [AuthController::class, 'login']);
 Route::apiResource('/companies', CompanyController::class);
 Route::apiResource('/customers', CustomerController::class);
 Route::apiResource('/teams', TeamController::class);
+Route::apiResource('/demands', DemandController::class);
 Route::apiResource('/tasks', TaskController::class);
 Route::apiResource('/expenses', ExpenseController::class);
 Route::prefix('me')->group(function() {

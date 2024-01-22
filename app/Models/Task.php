@@ -10,15 +10,15 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'status', 'deadline', 'team_id', 'customer_id'];
+    protected $fillable = ['title', 'description', 'status', 'deadline', 'demand_id', 'customer_id'];
 
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
     }
 
-    public function team(): BelongsTo
+    public function demand(): BelongsTo
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(Demand::class);
     }
 }

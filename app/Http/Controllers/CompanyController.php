@@ -10,14 +10,14 @@ class CompanyController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        // $this->middleware('auth:api');
     }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $companies = auth()->user()->company->with('customers')->with('teams.tasks')->with('users')->get();
+        $companies = Company::with('customers')->with('teams')->with('users')->get();
         return $companies;
     }
 

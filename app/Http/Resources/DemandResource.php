@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TeamResource extends JsonResource
+class DemandResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,8 @@ class TeamResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'demands' => DemandResource::collection($this->demands)
+            'title' => $this->title,
+            'teams' => $this->teams,
         ];
     }
 }
