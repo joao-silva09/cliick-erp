@@ -22,6 +22,11 @@ class Demand extends Model
         return $this->belongsToMany(Team::class);
     }
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
     public function tasks()
     {
         return $this->hasMany(Task::class);

@@ -17,6 +17,10 @@ class DemandResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'description' => $this->description,
+            'deadline' => $this->deadline,
+            'status' => $this->status,
+            'customer' => $this->customer,
             'teams' => $this->teams,
         ];
     }

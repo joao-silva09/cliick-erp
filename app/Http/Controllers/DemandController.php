@@ -14,7 +14,7 @@ class DemandController extends Controller
      */
     public function index()
     {
-        $demands = Demand::get();
+        $demands = Demand::with('customer')->get();
         return DemandResource::collection($demands);
     }
 
