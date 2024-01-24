@@ -22,7 +22,7 @@ class TaskResource extends JsonResource
             'status' => $this->status,
             // 'team' => new TeamResource($this->team),
             'demand' => new CustomerResource($this->demand),
-            'users' => UserResource::collection($this->users),
+            'users' => ($this->whenLoaded('users')),
         ];
     }
 }
