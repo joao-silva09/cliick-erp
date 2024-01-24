@@ -13,9 +13,9 @@ class DemandController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Team $team)
+    public function index()
     {
-        $demands = Demand::with('customer')->get();
+        $demands = Demand::with('customer')->with('tasks')->get();
         return DemandResource::collection($demands);
     }
 
@@ -51,7 +51,8 @@ class DemandController extends Controller
      */
     public function show(Demand $demand)
     {
-        return $demand;
+        $demand->load('customer')->load('tasks')->load('teams');
+        return new DemandResource($demand);
     }
 
     /**

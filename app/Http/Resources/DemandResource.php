@@ -20,8 +20,9 @@ class DemandResource extends JsonResource
             'description' => $this->description,
             'deadline' => $this->deadline,
             'status' => $this->status,
-            'customer' => $this->customer,
-            'teams' => $this->teams,
+            'customer' => $this->whenLoaded('customer'),
+            'teams' => $this->whenLoaded('teams'),
+            'tasks' => TaskResource::collection($this->whenLoaded('tasks')),
         ];
     }
 }
