@@ -26,9 +26,8 @@ class TaskRequest extends FormRequest
             'description' => ['string'],
             'deadline' => ['date'],
             'status' => ['required', 'string'],
-            'team_id' => ['required', 'int', 'exists:teams,id'],
-            'customer_id' => ['required', 'int', 'exists:customers,id'],
-            'user_id' => ['required', 'int', 'exists:users,id'],
+            'demand_id' => ['required', 'int', 'exists:demands,id'],
+            'users_ids' => ['required', 'array', 'exists:users,id'],
         ];
     }
 }

@@ -15,7 +15,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::with('team')->with('customer')->paginate(10);
+        $tasks = Task::with('demand')->with('users')->get();
 
         return TaskResource::collection($tasks);
     }
@@ -25,7 +25,13 @@ class TaskController extends Controller
      */
     public function store(TaskRequest $request)
     {
-        return response(Task::create($request->all()), 201);
+        $input = $request->validated();
+    
+        $task = Task::create($input);
+        $usersIds = $input['users_ids']; 
+        $task->users()->sync($usersIds);
+        
+        return response($task, 201);
     }
 
     /**

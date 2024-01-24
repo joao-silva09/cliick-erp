@@ -27,7 +27,7 @@ class DemandController extends Controller
 
         // return dd($input);
         $demand = Demand::create($input);
-        $teamsIds = $request->input('teams_ids');
+        $teamsIds = $input['teams_ids'];
         $demand->teams()->sync($teamsIds);
         return new DemandResource($demand);
 
