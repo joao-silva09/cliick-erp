@@ -31,7 +31,16 @@ Route::post('login', [AuthController::class, 'login']);
 Route::apiResource('/companies', CompanyController::class);
 Route::apiResource('/customers', CustomerController::class);
 Route::apiResource('/teams', TeamController::class);
-Route::apiResource('/demands', DemandController::class);
+// Route::apiResource('/demands', DemandController::class);
+Route::group(['prefix' => '/demands'], function () {
+    Route::get('', [DemandController::class, 'index']);
+    Route::get('team/{team}', [DemandController::class, 'getByTeam']);
+    Route::post('', [DemandController::class, 'store']);
+    Route::get('{demand}', [DemandController::class, 'show']);
+    Route::put('', [DemandController::class, 'update']);
+    Route::delete('', [DemandController::class, 'destroy']);
+});
+
 Route::apiResource('/tasks', TaskController::class);
 Route::apiResource('/expenses', ExpenseController::class);
 Route::prefix('me')->group(function() {

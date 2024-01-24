@@ -15,7 +15,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Team::with('company')->get();
+        $teams = Team::get();
 
         return TeamResource::collection($teams);
     }

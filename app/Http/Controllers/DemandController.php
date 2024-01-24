@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DemandRequest;
 use App\Http\Resources\DemandResource;
 use App\Models\Demand;
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class DemandController extends Controller
@@ -12,9 +13,21 @@ class DemandController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Team $team)
     {
         $demands = Demand::with('customer')->get();
+        return DemandResource::collection($demands);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function getByTeam(Team $team)
+    {
+        $demands = Demand::whereHas('teams', function ($query) use ($team) {
+            $query->where('team_id', $team->id);
+        })->get();
+        // $demands = Demand::with('customer')->get();
         return DemandResource::collection($demands);
     }
 
@@ -36,9 +49,9 @@ class DemandController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Demand $demand)
     {
-        //
+        return $demand;
     }
 
     /**
