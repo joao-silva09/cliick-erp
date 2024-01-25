@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DemandRequest;
 use App\Http\Resources\DemandResource;
 use App\Models\Demand;
+use App\Models\Task;
 use App\Models\Team;
 use Illuminate\Http\Request;
 
@@ -68,7 +69,14 @@ class DemandController extends Controller
      */
     public function destroy(Demand $demand)
     {
+        $tasks = $demand->tasks;
+
+        foreach ($tasks as $task) {
+            $task->users()->detach();
+        }
+
         $demand->teams()->detach();
+        $demand->tasks()->delete();
         $demand->delete();
         return response()->noContent();
     }

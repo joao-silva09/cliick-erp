@@ -38,7 +38,7 @@ Route::group(['prefix' => '/demands'], function () {
     Route::post('', [DemandController::class, 'store']);
     Route::get('{demand}', [DemandController::class, 'show']);
     Route::put('', [DemandController::class, 'update']);
-    Route::delete('', [DemandController::class, 'destroy']);
+    Route::delete('{demand}', [DemandController::class, 'destroy']);
 });
 
 Route::apiResource('/tasks', TaskController::class);
