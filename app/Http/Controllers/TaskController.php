@@ -39,7 +39,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return $task->with('customer')->with('team')->get();
+        return new TaskResource($task->load('demand')->load('users'));
     }
 
     /**
