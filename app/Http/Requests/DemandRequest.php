@@ -28,6 +28,7 @@ class DemandRequest extends FormRequest
             'status' => ['required', 'string'],
             'customer_id' => ['required', 'int', 'exists:customers,id'],
             'teams_ids' => ['required', 'array', 'exists:teams,id'],
+            'created_by' => ['required', 'id', 'exists:users,id'],
         ];
     }
 }

@@ -15,6 +15,7 @@ class Demand extends Model
         'deadline',
         'status',
         'customer_id',
+        'created_by',
     ];
 
     public function teams()
@@ -30,5 +31,9 @@ class Demand extends Model
     public function tasks()
     {
         return $this->hasMany(Task::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

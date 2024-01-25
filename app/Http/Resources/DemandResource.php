@@ -23,6 +23,10 @@ class DemandResource extends JsonResource
             'customer' => $this->whenLoaded('customer'),
             'teams' => $this->whenLoaded('teams'),
             'tasks' => TaskResource::collection($this->whenLoaded('tasks')),
+            'created_by' => $this->whenLoaded('user', function() {
+                // return new UserResource($this->user); Retorna o user completo
+                return $this->user['first_name'] . ' ' . $this->user['last_name'];
+            })
         ];
     }
 }

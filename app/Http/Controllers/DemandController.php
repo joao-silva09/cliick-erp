@@ -16,7 +16,7 @@ class DemandController extends Controller
      */
     public function index()
     {
-        $demands = Demand::with('customer')->with('tasks')->get();
+        $demands = Demand::with('customer')->with('tasks')->with('user')->get();
         return DemandResource::collection($demands);
     }
 
@@ -35,14 +35,22 @@ class DemandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(DemandRequest $request)
+    public function store(Request $request)
     {
-        $input = $request->validated();
+        $input = $request;
 
-        // return dd($input);
-        $demand = Demand::create($input);
+        $demand = Demand::create([
+            'title' => $input['title'],
+            'description' => $input['description'] ?? null,
+            'status' => $input['status'],
+            'deadline' => $input['deadline'],
+            'customer_id' => $input['customer_id'],
+            'created_by' => auth()->user()->id
+        ]);
+
         $teamsIds = $input['teams_ids'];
         $demand->teams()->sync($teamsIds);
+
         return new DemandResource($demand);
 
     }
