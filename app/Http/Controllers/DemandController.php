@@ -40,7 +40,7 @@ class DemandController extends Controller
     {
         $demands = Demand::where('customer_id', $customer->id)->get();
         // $demands = Demand::with('customer')->get();
-        return DemandResource::collection($demands);
+        return DemandResource::collection($demands->load('tasks'));
     }
 
     /**
