@@ -28,7 +28,7 @@ class DemandController extends Controller
             $query->where('team_id', $team->id);
         })->get();
         // $demands = Demand::with('customer')->get();
-        return DemandResource::collection($demands);
+        return DemandResource::collection($demands->load('customer')->load('tasks')->load('teams')->load('tasks.users'));
     }
 
     /**

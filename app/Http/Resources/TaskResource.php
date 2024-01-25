@@ -21,8 +21,8 @@ class TaskResource extends JsonResource
             'deadline' => $this->deadline,
             'status' => $this->status,
             // 'team' => new TeamResource($this->team),
-            'demand' => new DemandResource($this->demand),
-            'users' => ($this->whenLoaded('users')),
+            'demand' => new DemandResource($this->whenLoaded('demand')),
+            'users' => UserResource::collection($this->whenLoaded('users')),
         ];
     }
 }
