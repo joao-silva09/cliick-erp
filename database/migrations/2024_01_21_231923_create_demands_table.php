@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description');
             $table->date('deadline')->nullable();
             $table->string('status');
+            // $table->string('created_by');
             $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->timestamps();

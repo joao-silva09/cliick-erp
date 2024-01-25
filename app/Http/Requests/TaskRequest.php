@@ -28,6 +28,7 @@ class TaskRequest extends FormRequest
             'status' => ['required', 'string'],
             'demand_id' => ['required', 'int', 'exists:demands,id'],
             'users_ids' => ['required', 'array', 'exists:users,id'],
+            'created_by' => ['required', 'int', 'exists:users,id'],
         ];
     }
 }

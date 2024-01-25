@@ -20,6 +20,8 @@ return new class extends Migration
             $table->unsignedBigInteger('demand_id');
             $table->foreign('demand_id')->references('id')->on('demands');
             $table->timestamps();
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users');
         });
     }
 

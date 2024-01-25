@@ -10,7 +10,7 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'status', 'deadline', 'demand_id'];
+    protected $fillable = ['title', 'description', 'status', 'deadline', 'created_by', 'demand_id'];
 
     public function demand(): BelongsTo
     {
@@ -20,5 +20,10 @@ class Task extends Model
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

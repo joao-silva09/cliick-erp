@@ -10,12 +10,17 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $tasks = Task::with('demand')->with('users')->get();
+        $tasks = Task::with('demand')->with('users')->with('user')->get();
 
         return TaskResource::collection($tasks);
     }
@@ -23,11 +28,22 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(TaskRequest $request)
+    public function store(Request $request)
     {
-        $input = $request->validated();
-    
-        $task = Task::create($input);
+        $input = $request;
+        $user = auth()->user()->id;
+        
+        $task = new Task([
+            'title' => $input['title'],
+            'description' => $input['description'],
+            'status' => $input['status'],
+            'deadline' => $input['deadline'],
+            'demand_id' => $input['demand_id'],
+            'created_by' => auth()->user()->id
+        ]);
+        
+        $task->save();
+        // return dd($task);
         $usersIds = $input['users_ids']; 
         $task->users()->sync($usersIds);
         
