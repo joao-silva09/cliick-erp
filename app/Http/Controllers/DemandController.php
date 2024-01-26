@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DemandRequest;
 use App\Http\Resources\DemandResource;
+use App\Http\Resources\UserResource;
 use App\Models\Customer;
 use App\Models\Demand;
 use App\Models\Task;
@@ -48,13 +49,13 @@ class DemandController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function getUsersByTeams(Demand $demand)
+    public function getUsersByDemand(Demand $demand)
     {
-
         $users = $demand->teams()->with('users')->get()->pluck('users')->flatten();
-        // $demands = Demand::where('customer_id', $customer->id)->get();
-        // $demands = Demand::with('customer')->get();
-        return $users;
+
+        $response = $users->unique('id')->sortBy('name');
+
+        return UserResource::collection($response);
     }
 
     /**

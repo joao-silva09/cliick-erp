@@ -45,7 +45,7 @@ Route::group(['prefix' => '/demands'], function () {
     Route::get('', [DemandController::class, 'index']);
     Route::get('team/{team}', [DemandController::class, 'getByTeam']);
     Route::get('customer/{customer}', [DemandController::class, 'getByCustomer']);
-    Route::get('users/{demand}', [DemandController::class, 'getUsersByTeams']);
+    Route::get('users/{demand}', [DemandController::class, 'getUsersByDemand']);
     Route::post('', [DemandController::class, 'store']);
     Route::get('{demand}', [DemandController::class, 'show']);
     Route::put('', [DemandController::class, 'update']);
