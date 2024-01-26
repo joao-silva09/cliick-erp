@@ -42,7 +42,7 @@ class MessageController extends Controller
             'username' => $user['first_name'] . ' ' . $user['last_name'],
         ]);
 
-        return $message;
+        return new MessageResource($message);
     }
 
     /**
