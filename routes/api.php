@@ -32,11 +32,20 @@ Route::post('login', [AuthController::class, 'login']);
 Route::apiResource('/companies', CompanyController::class);
 Route::apiResource('/customers', CustomerController::class);
 Route::apiResource('/teams', TeamController::class);
+Route::prefix('teams')->group(function() {
+    Route::get('', [TeamController::class, 'index']);
+    Route::post('', [TeamController::class, 'store']);
+    Route::post('{team}/add-users', [TeamController::class, 'addUsers']);
+    Route::get('{team}', [TeamController::class, 'show']);
+    Route::put('', [TeamController::class, 'update']);
+    Route::delete('{team}', [TeamController::class, 'destroy']);
+});
 // Route::apiResource('/demands', DemandController::class);
 Route::group(['prefix' => '/demands'], function () {
     Route::get('', [DemandController::class, 'index']);
     Route::get('team/{team}', [DemandController::class, 'getByTeam']);
     Route::get('customer/{customer}', [DemandController::class, 'getByCustomer']);
+    Route::get('users/{demand}', [DemandController::class, 'getUsersByTeams']);
     Route::post('', [DemandController::class, 'store']);
     Route::get('{demand}', [DemandController::class, 'show']);
     Route::put('', [DemandController::class, 'update']);

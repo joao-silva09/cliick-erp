@@ -16,8 +16,14 @@ class Team extends Model
     {
         return $this->belongsTo(Company::class);
     }
+    
     public function demands()
     {
         return $this->belongsToMany(Demand::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 }

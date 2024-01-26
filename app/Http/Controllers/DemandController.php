@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\Demand;
 use App\Models\Task;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DemandController extends Controller
@@ -45,6 +46,18 @@ class DemandController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     */
+    public function getUsersByTeams(Demand $demand)
+    {
+
+        $users = $demand->teams()->with('users')->get()->pluck('users')->flatten();
+        // $demands = Demand::where('customer_id', $customer->id)->get();
+        // $demands = Demand::with('customer')->get();
+        return $users;
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -63,7 +76,7 @@ class DemandController extends Controller
         $teamsIds = $input['teams_ids'];
         $demand->teams()->sync($teamsIds);
 
-        return new DemandResource($demand->load('tasks'));
+        return new DemandResource($demand);
 
     }
 

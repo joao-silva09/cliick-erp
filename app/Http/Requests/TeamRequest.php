@@ -25,6 +25,7 @@ class TeamRequest extends FormRequest
             'name' => ['required', 'string', 'between:2,100'],
             'description' => ['string'],
             'company_id' => ['required', 'int', 'exists:companies,id'],
+            'users_ids' => ['required', 'array', 'exists:users,id'],
         ];
     }
 }

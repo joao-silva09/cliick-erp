@@ -6,6 +6,7 @@ use App\Http\Requests\TeamRequest;
 use App\Http\Resources\TeamCollection;
 use App\Http\Resources\TeamResource;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TeamController extends Controller
@@ -15,7 +16,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Team::get();
+        $teams = Team::with('users')->get();
 
         return TeamResource::collection($teams);
     }
@@ -25,7 +26,29 @@ class TeamController extends Controller
      */
     public function store(TeamRequest $request)
     {
-        return response(Team::create($request->all()), 201);
+        $input = $request;
+
+        $team = Team::create([
+            'name' => $input['name'],
+            'description' => $input['description'],
+            'company_id' => 1,
+        ]);
+
+        $usersIds = $input['users_ids'];
+        $team->users()->sync($usersIds);
+        return response($team, 201);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function addUsers(Team $team, Request $request)
+    {
+        $usersIds = $request['users_ids'];
+
+        $team->users()->attach($usersIds);
+
+        return new TeamResource($team->load('users'));
     }
 
     /**
