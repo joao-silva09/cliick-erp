@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DemandController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\MeController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Http\Request;
@@ -41,7 +42,14 @@ Route::group(['prefix' => '/demands'], function () {
     Route::put('', [DemandController::class, 'update']);
     Route::delete('{demand}', [DemandController::class, 'destroy']);
 });
-
+Route::group(['prefix' => '/messages'], function () {
+    Route::get('', [MessageController::class, 'index']);
+    Route::get('task/{task}', [MessageController::class, 'getByTask']);
+    Route::post('', [MessageController::class, 'store']);
+    Route::get('{demand}', [MessageController::class, 'show']);
+    Route::put('', [MessageController::class, 'update']);
+    Route::delete('{demand}', [MessageController::class, 'destroy']);
+});
 Route::apiResource('/tasks', TaskController::class);
 Route::apiResource('/expenses', ExpenseController::class);
 Route::prefix('me')->group(function() {

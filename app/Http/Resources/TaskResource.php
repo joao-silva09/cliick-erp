@@ -23,6 +23,7 @@ class TaskResource extends JsonResource
             // 'team' => new TeamResource($this->team),
             'demand' => new DemandResource($this->whenLoaded('demand')),
             'users' => UserResource::collection($this->whenLoaded('users')),
+            'messages' => MessageResource::collection($this->whenLoaded('messages')),
             'created_by' => ($this->whenLoaded('user', function() {
                 // return new UserResource($this->user); Retorna user completo
                 return $this->user['first_name'] . ' ' . $this->user['last_name'];
