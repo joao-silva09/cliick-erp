@@ -20,7 +20,7 @@ class DemandResource extends JsonResource
             'description' => $this->description,
             'deadline' => $this->deadline,
             'status' => $this->status,
-            'customer' => $this->whenLoaded('customer'),
+            'customer' => new CustomerResource($this->whenLoaded('customer')),
             'teams' => $this->whenLoaded('teams'),
             'tasks' => TaskResource::collection($this->whenLoaded('tasks')),
             'created_by' => $this->whenLoaded('user', function() {

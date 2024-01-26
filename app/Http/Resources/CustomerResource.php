@@ -20,7 +20,7 @@ class CustomerResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'entry_date' => $this->entry_date,
-            'company' => new CompanyResource($this->company),
+            'company' => new CompanyResource($this->whenLoaded('company')),
         ];
     }
 }
