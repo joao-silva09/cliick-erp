@@ -20,9 +20,10 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::with('demand')->with('users')->with('user')->get();
+        // Task::with('demand')->with('users')->with('user')->get();
+        $tasks = auth()->user()->tasks;
 
-        return TaskResource::collection($tasks);
+        return TaskResource::collection($tasks->load('demand'));
     }
 
     /**
