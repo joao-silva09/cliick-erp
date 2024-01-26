@@ -63,7 +63,7 @@ class DemandController extends Controller
         $teamsIds = $input['teams_ids'];
         $demand->teams()->sync($teamsIds);
 
-        return new DemandResource($demand);
+        return new DemandResource($demand->load('tasks'));
 
     }
 
