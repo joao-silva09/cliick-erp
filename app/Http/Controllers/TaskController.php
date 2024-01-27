@@ -48,7 +48,7 @@ class TaskController extends Controller
         $usersIds = $input['users_ids']; 
         $task->users()->sync($usersIds);
         
-        return response($task, 201);
+        return new TaskResource($task);
     }
 
     /**
