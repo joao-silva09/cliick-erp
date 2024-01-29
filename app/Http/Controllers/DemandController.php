@@ -19,7 +19,10 @@ class DemandController extends Controller
      */
     public function index()
     {
-        $demands = Demand::with('customer')->with('tasks')->with('user')->get();
+        $demands = Demand::with('customer')
+            ->with('tasks')
+            ->with('user')
+            ->get();
         
         return DemandResource::collection($demands);
     }
@@ -33,7 +36,12 @@ class DemandController extends Controller
             $query->where('team_id', $team->id);
         })->get();
         // $demands = Demand::with('customer')->get();
-        return DemandResource::collection($demands->load('customer')->load('tasks')->load('teams')->load('tasks.users'));
+        return DemandResource::collection($demands
+            ->load('customer')
+            ->load('tasks')
+            ->load('teams')
+            ->load('tasks.users')
+        );
     }
 
     /**
@@ -43,7 +51,9 @@ class DemandController extends Controller
     {
         $demands = Demand::where('customer_id', $customer->id)->get();
         // $demands = Demand::with('customer')->get();
-        return DemandResource::collection($demands->load('tasks'));
+        return DemandResource::collection($demands->load('tasks')
+            ->load('customer')
+        );
     }
 
     /**
@@ -51,9 +61,15 @@ class DemandController extends Controller
      */
     public function getUsersByDemand(Demand $demand)
     {
-        $users = $demand->teams()->with('users')->get()->pluck('users')->flatten();
+        $users = $demand->teams()
+            ->with('users')
+            ->get()
+            ->pluck('users')
+            ->flatten();
 
-        $response = $users->unique('id')->sortBy('name');
+        $response = $users
+            ->unique('id')
+            ->sortBy('name');
 
         return UserResource::collection($response);
     }
@@ -75,9 +91,10 @@ class DemandController extends Controller
         ]);
 
         $teamsIds = $input['teams_ids'];
-        $demand->teams()->sync($teamsIds);
+        $demand->teams()
+            ->sync($teamsIds);
 
-        return new DemandResource($demand);
+        return new DemandResource($demand->load('customer'));
 
     }
 
@@ -86,7 +103,10 @@ class DemandController extends Controller
      */
     public function show(Demand $demand)
     {
-        $demand->load('customer')->load('tasks')->load('teams');
+        $demand->load('customer')
+            ->load('tasks')
+            ->load('teams');
+
         return new DemandResource($demand);
     }
 
