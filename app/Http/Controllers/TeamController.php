@@ -36,7 +36,7 @@ class TeamController extends Controller
 
         $usersIds = $input['users_ids'];
         $team->users()->sync($usersIds);
-        return response($team, 201);
+        return new TeamResource($team->load('users'));
     }
 
     /**
