@@ -17,7 +17,9 @@ class CompanyController extends Controller
      */
     public function index(Request $request)
     {
-        $companies = Company::with('customers')->with('teams')->with('users')->get();
+        $companies = Company::with('customers')->with('teams')
+            ->with('users')
+            ->get();
         return $companies;
     }
 
