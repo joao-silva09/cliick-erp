@@ -18,8 +18,8 @@ class CompanyResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'balance' => $this->balance,
-            'customers' => $this->customers,
-            'users' => $this->users
+            'customers' => $this->whenLoaded('customers'),
+            'users' => $this->whenLoaded('users')
         ];
     }
 }

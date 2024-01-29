@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DemandRequest;
+use App\Http\Resources\CustomerResource;
 use App\Http\Resources\DemandResource;
+use App\Http\Resources\TeamResource;
 use App\Http\Resources\UserResource;
 use App\Models\Customer;
 use App\Models\Demand;
@@ -32,16 +34,18 @@ class DemandController extends Controller
      */
     public function getByTeam(Team $team)
     {
-        $demands = Demand::whereHas('teams', function ($query) use ($team) {
-            $query->where('team_id', $team->id);
-        })->get();
-        // $demands = Demand::with('customer')->get();
-        return DemandResource::collection($demands
-            ->load('customer')
-            ->load('tasks')
-            ->load('teams')
-            ->load('tasks.users')
-        );
+        // $demands = Demand::whereHas('teams', function ($query) use ($team) {
+        //     $query->where('team_id', $team->id);
+        // })->get();
+        // // $demands = Demand::with('customer')->get();
+        // return DemandResource::collection($demands
+        //     ->load('customer')
+        //     ->load('tasks')
+        //     ->load('teams')
+        //     ->load('tasks.users')
+        // );
+
+        return new TeamResource($team->load('demands.tasks'));
     }
 
     /**
@@ -49,11 +53,9 @@ class DemandController extends Controller
      */
     public function getByCustomer(Customer $customer)
     {
-        $demands = Demand::where('customer_id', $customer->id)->get();
+        // $demands = Demand::where('customer_id', $customer->id)->get();
         // $demands = Demand::with('customer')->get();
-        return DemandResource::collection($demands->load('tasks')
-            ->load('customer')
-        );
+        return new CustomerResource($customer->load('demands.tasks'));
     }
 
     /**
