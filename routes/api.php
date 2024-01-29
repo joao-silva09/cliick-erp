@@ -63,5 +63,6 @@ Route::apiResource('/tasks', TaskController::class);
 Route::apiResource('/expenses', ExpenseController::class);
 Route::prefix('me')->group(function() {
     Route::get('', [MeController::class, 'index']);
+    Route::get('all', [MeController::class, 'all']);
     Route::put('', [MeController::class, 'update']);
 });
