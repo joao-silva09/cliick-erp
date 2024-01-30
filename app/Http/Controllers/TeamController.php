@@ -8,6 +8,7 @@ use App\Http\Resources\TeamResource;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TeamController extends Controller
 {
@@ -46,7 +47,17 @@ class TeamController extends Controller
     {
         $usersIds = $request['users_ids'];
 
-        $team->users()->attach($usersIds);
+        $usersIds = array_unique($usersIds);
+
+        $usersInTeam = DB::table('team_user')
+            ->whereIn('user_id', $usersIds)
+            ->where('team_id', $team->id)
+            ->pluck('user_id')
+            ->toArray();
+
+        $usersToAdd = array_diff($usersIds, $usersInTeam);
+                
+        $team->users()->attach($usersToAdd);
 
         return new TeamResource($team->load('users'));
     }
@@ -70,8 +81,12 @@ class TeamController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Team $team)
     {
-        //
+        $team->users()->detach();
+        $team->demands()->detach();
+        $team->delete();
+
+        return response()->noContent();
     }
 }

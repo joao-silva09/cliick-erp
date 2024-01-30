@@ -129,10 +129,10 @@ class DemandController extends Controller
 
         foreach ($tasks as $task) {
             $task->users()->detach();
+            $demand->tasks()->delete();
         }
 
         $demand->teams()->detach();
-        $demand->tasks()->delete();
         $demand->delete();
         return response()->noContent();
     }
