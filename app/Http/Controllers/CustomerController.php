@@ -25,7 +25,8 @@ class CustomerController extends Controller
      */
     public function store(CustomerRequest $request)
     {
-        return response(Customer::create($request->all()), 201);
+        $customer = Customer::create($request->all());
+        return new CustomerResource($customer);
     }
 
     /**
