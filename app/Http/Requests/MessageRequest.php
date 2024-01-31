@@ -24,6 +24,7 @@ class MessageRequest extends FormRequest
         return [
             'message' => ['required', 'string'],
             'username' => ['required', 'string'],
+            'message_type' => ['required', 'string'],
             'task_id' => ['required', 'int', 'exists:tasks,id'],
         ];
     }

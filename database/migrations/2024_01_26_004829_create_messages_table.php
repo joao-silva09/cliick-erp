@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('message');
             $table->string('username');
+            $table->string('message_type');
             $table->unsignedBigInteger('task_id');
             $table->foreign('task_id')->references('id')->on('tasks');
             $table->timestamps();

@@ -63,7 +63,8 @@ class DemandController extends Controller
      */
     public function getUsersByDemand(Demand $demand)
     {
-        $users = $demand->teams()
+        $users = $demand
+            ->teams()
             ->with('users')
             ->get()
             ->pluck('users')

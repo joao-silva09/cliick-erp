@@ -59,6 +59,14 @@ Route::group(['prefix' => '/messages'], function () {
     Route::put('', [MessageController::class, 'update']);
     Route::delete('{demand}', [MessageController::class, 'destroy']);
 });
+Route::group(['prefix' => '/tasks'], function () {
+    Route::get('', [TaskController::class, 'index']);
+    Route::post('{task}/request-approval', [TaskController::class, 'requestApproval']);
+    Route::post('', [TaskController::class, 'store']);
+    Route::get('{task}', [TaskController::class, 'show']);
+    Route::put('', [TaskController::class, 'update']);
+    Route::delete('{task}', [TaskController::class, 'destroy']);
+});
 Route::apiResource('/tasks', TaskController::class);
 Route::apiResource('/expenses', ExpenseController::class);
 Route::prefix('me')->group(function() {
