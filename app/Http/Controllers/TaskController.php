@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TaskRequest;
 use App\Http\Resources\TaskCollection;
 use App\Http\Resources\TaskResource;
+use App\Models\Message;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,30 @@ class TaskController extends Controller
         // Task::with('demand')->with('users')->with('user')->get();
         $tasks = auth()->user()->tasks;
 
-        return TaskResource::collection($tasks->load('demand.customer'));
+        return TaskResource::collection($tasks->load('demand.customer')->sortBy('deadline'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function requestApproval(Request $request, Task $task)
+    {
+        $input = $request;
+
+        $user = auth()->user();
+
+        $task->status = "Aguardando aprovação";
+
+        Message::create([
+            "message" => $input['message'],
+            "task_id" => $task->id,
+            "message_type" => 'request_approval',
+            'username' => $user['first_name'] . ' ' . $user['last_name'],
+        ]);
+        
+        $task->save();
+        
+        return new TaskResource($task->load('messages'));
     }
 
     /**

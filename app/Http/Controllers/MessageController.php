@@ -39,6 +39,7 @@ class MessageController extends Controller
         $message = Message::create([
             'message' => $input['message'],
             'task_id' => $input['task_id'],
+            'message_type' => $input['message_type'] ?? 'default',
             'username' => $user['first_name'] . ' ' . $user['last_name'],
         ]);
 
