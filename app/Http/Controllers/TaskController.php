@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
+use App\Http\Resources\MessageResource;
 use App\Http\Resources\TaskCollection;
 use App\Http\Resources\TaskResource;
 use App\Models\Message;
@@ -38,7 +39,7 @@ class TaskController extends Controller
 
         $task->status = "Aguardando aprovação";
 
-        Message::create([
+        $message = Message::create([
             "message" => $input['message'],
             "task_id" => $task->id,
             "message_type" => 'request_approval',
@@ -47,7 +48,7 @@ class TaskController extends Controller
         
         $task->save();
         
-        return new TaskResource($task->load('messages'));
+        return new MessageResource($message);
     }
 
     /**
