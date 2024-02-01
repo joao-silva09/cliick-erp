@@ -29,6 +29,20 @@ class TaskController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     */
+    public function completedTasks()
+    {
+        $tasks = auth()->user()->tasks;
+
+        return TaskResource::collection($tasks
+            ->load('demand.customer')
+            ->where('status', 'Concluído')
+            ->sortBy('deadline')
+        );
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function complete(Request $request, Task $task)
