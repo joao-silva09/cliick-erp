@@ -40,7 +40,6 @@ Route::prefix('teams')->group(function() {
     Route::put('', [TeamController::class, 'update']);
     Route::delete('{team}', [TeamController::class, 'destroy']);
 });
-// Route::apiResource('/demands', DemandController::class);
 Route::group(['prefix' => '/demands'], function () {
     Route::get('', [DemandController::class, 'index']);
     Route::get('team/{team}', [DemandController::class, 'getByTeam']);
@@ -61,6 +60,7 @@ Route::group(['prefix' => '/messages'], function () {
 });
 Route::group(['prefix' => '/tasks'], function () {
     Route::get('', [TaskController::class, 'index']);
+    Route::post('{task}/complete', [TaskController::class, 'complete']);
     Route::post('{task}/request-approval', [TaskController::class, 'requestApproval']);
     Route::post('', [TaskController::class, 'store']);
     Route::get('{task}', [TaskController::class, 'show']);

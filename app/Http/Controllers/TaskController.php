@@ -31,6 +31,29 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    public function complete(Request $request, Task $task)
+    {
+        $input = $request;
+
+        $user = auth()->user();
+
+        $task->status = "Concluído";
+
+        $message = Message::create([
+            "message" => $input['message'],
+            "task_id" => $task->id,
+            "message_type" => 'completed',
+            'username' => $user['first_name'] . ' ' . $user['last_name'],
+        ]);
+        
+        $task->save();
+        
+        return new MessageResource($message);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function requestApproval(Request $request, Task $task)
     {
         $input = $request;
