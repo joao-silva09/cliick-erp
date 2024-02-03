@@ -118,7 +118,12 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return new TaskResource($task->load('demand.customer')->load('users')->load('messages'));
+        return new TaskResource($task
+            ->load('demand.customer', 'demand.teams')
+            ->load('user')
+            ->load('users')
+            ->load('messages')
+        );
     }
 
     /**
