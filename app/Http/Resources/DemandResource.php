@@ -21,7 +21,7 @@ class DemandResource extends JsonResource
             'deadline' => $this->deadline,
             'status' => $this->status,
             'customer' => new CustomerResource($this->whenLoaded('customer')),
-            'teams' => new TeamResource($this->whenLoaded('teams')),
+            'teams' => TeamResource::collection($this->whenLoaded('teams')),
             'tasks' => TaskResource::collection($this->whenLoaded('tasks')),
             'created_by' => $this->whenLoaded('user', function() {
                 // return new UserResource($this->user); Retorna o user completo
