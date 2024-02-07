@@ -27,10 +27,15 @@ Route::middleware('api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
-Route::apiResource('/companies', CompanyController::class);
-Route::apiResource('/customers', CustomerController::class);
+Route::group(['middleware' => 'cors'], function () {
+    
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('login', [AuthController::class, 'login']);
+    Route::apiResource('/companies', CompanyController::class);
+    Route::apiResource('/customers', CustomerController::class);
+});
+
+
 Route::apiResource('/teams', TeamController::class);
 Route::prefix('teams')->group(function() {
     Route::get('', [TeamController::class, 'index']);
