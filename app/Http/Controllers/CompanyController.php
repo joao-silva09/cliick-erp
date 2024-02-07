@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CompanyRequest;
+use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class CompanyController extends Controller
         $companies = Company::with('customers')->with('teams')
             ->with('users')
             ->get();
-        return $companies;
+        return CompanyResource::collection($companies);
     }
 
     /**
