@@ -21,6 +21,7 @@ class TeamResource extends JsonResource
             'company' => new CompanyResource($this->whenLoaded('company')),
             'demands' => DemandResource::collection($this->whenLoaded('demands')),
             'users' => UserResource::collection($this->whenLoaded('users')),
+            'tasks' => TaskResource::collection($this->whenLoaded('tasks')),
         ];
     }
 }

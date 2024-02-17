@@ -22,6 +22,7 @@ class CustomerResource extends JsonResource
             'entry_date' => $this->entry_date,
             'company' => new CompanyResource($this->whenLoaded('company')),
             'demands' => DemandResource::collection($this->whenLoaded('demands')),
+            'tasks' => TaskResource::collection($this->whenLoaded('tasks')),
         ];
     }
 }

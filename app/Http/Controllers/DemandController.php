@@ -59,8 +59,8 @@ class DemandController extends Controller
         // $demands = Demand::where('customer_id', $customer->id)->get();
         // $demands = Demand::with('customer')->get();
         return new CustomerResource($customer
-        ->load('demands.tasks')
         ->load('demands.teams')
+        ->load('demands.tasks')
         );
     }
 
