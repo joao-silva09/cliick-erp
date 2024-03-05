@@ -107,18 +107,15 @@ class TaskController extends Controller
 
         
         $task->save();
-        // return dd($task);
         $usersIds = $input['users_ids']; 
         $task->users()->sync($usersIds);
-
-        // dd($user);
 
         Message::create([
             "message" => '<b>Título: </b>' . $task['title'] . 
                         '<br><b>Descrição: </b>' . $task->description .
                         '<br><b>Data de Criação: </b>' . $task->created_at->format('d/m/Y') .
                         '<br><b>Prazo: </b>' . $task->deadline,
-                        '<br><b>Criado Por: </b>' . $user['first_name'] . '' . $user['last_name'],
+                        '<br><b>Criado Por: </b>' . $user['first_name'] . ' ' . $user['last_name'],
             "task_id" => $task->id,
             "message_type" => 'new_task',
             'username' => 'Sistema',
