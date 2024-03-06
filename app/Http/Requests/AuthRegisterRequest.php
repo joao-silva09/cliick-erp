@@ -25,6 +25,7 @@ class AuthRegisterRequest extends FormRequest
             'first_name' => ['required', 'string'],
             'last_name' => ['string', 'nullable'],
             'email' => ['string', 'required', 'email'],
+            'user_type' => ['string', 'required'],
             'password' => ['string', 'required', 'min:6', 'max:30'],
             'company_id' => ['required', 'int', 'exists:companies,id'],
         ];

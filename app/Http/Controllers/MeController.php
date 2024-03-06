@@ -21,7 +21,7 @@ class MeController extends Controller
 
     public function all()
     {
-        $users = User::get();
+        $users = User::where('company_id', 1)->get();
         return UserResource::collection($users);
     }
 

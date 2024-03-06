@@ -31,8 +31,9 @@ class AuthController extends Controller
             $input['first_name'], 
             $input['last_name'] ?? '', 
             $input['email'],
-             $input['password'],
-              $input['company_id']
+            $input['user_type'],
+            $input['password'],
+            $input['company_id']
         );
 
         return new UserResource($user);
