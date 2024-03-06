@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Company;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,7 +20,7 @@ class CustomerResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'entry_date' => $this->entry_date,
+            'entry_date' => Carbon::parse($this->entry_date)->format('d/m/Y'),
             'company' => new CompanyResource($this->whenLoaded('company')),
             'demands' => DemandResource::collection($this->whenLoaded('demands')),
             'tasks' => TaskResource::collection($this->whenLoaded('tasks')),
