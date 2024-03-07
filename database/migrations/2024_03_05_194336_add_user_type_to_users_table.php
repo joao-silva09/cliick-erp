@@ -10,22 +10,22 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::table('users', function (Blueprint $table) {
-        $table->string('user_type');
-        $table->string('phone');
-    });
-}
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('user_type');
+            $table->string('phone');
+        });
+    }
 
 
     /**
      * Reverse the migrations.
      */
     public function down()
-{
-    Schema::table('users', function (Blueprint $table) {
-        $table->dropColumn('user_type');
-    });
-}
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('user_type');
+        });
+    }
 
 };
