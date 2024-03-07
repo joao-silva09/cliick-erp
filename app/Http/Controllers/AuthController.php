@@ -31,6 +31,7 @@ class AuthController extends Controller
             $input['first_name'], 
             $input['last_name'] ?? '', 
             $input['email'],
+            $input['phone'],
             $input['user_type'],
             $input['password'],
             $input['company_id']
