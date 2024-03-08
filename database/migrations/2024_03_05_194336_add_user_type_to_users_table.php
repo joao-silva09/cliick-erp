@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('user_type');
             $table->string('phone');
+            $table->string('profile_photo')->nullable();
         });
     }
 
@@ -25,6 +26,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('user_type');
+            $table->dropColumn('phone');
+            $table->dropColumn('profile_photo');
         });
     }
 

@@ -75,4 +75,5 @@ Route::prefix('me')->group(function() {
     Route::get('', [MeController::class, 'index']);
     Route::get('all', [MeController::class, 'all']);
     Route::put('', [MeController::class, 'update']);
+    Route::post('profile-photo', [MeController::class, 'updateProfilePhoto']);
 });
