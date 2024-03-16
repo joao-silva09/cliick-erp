@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('description');
             $table->date('deadline')->nullable();
             $table->string('status');
-            $table->unsignedBigInteger('demand_id');
-            $table->foreign('demand_id')->references('id')->on('demands');
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers');
             $table->timestamps();
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users');
