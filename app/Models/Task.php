@@ -10,16 +10,29 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'status', 'deadline', 'created_by', 'demand_id'];
+    protected $fillable = [
+        'title', 
+        'description', 
+        'status', 
+        'deadline', 
+        'created_by', 
+        'demand_id',
+        'customer_id'
+    ];
 
-    public function demand(): BelongsTo
+    public function customer(): BelongsTo
     {
-        return $this->belongsTo(Demand::class);
+        return $this->belongsTo(Customer::class);
     }
 
     public function messages()
     {
         return $this->hasMany(Message::class);
+    }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class);
     }
 
     public function users()
