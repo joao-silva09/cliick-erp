@@ -101,7 +101,8 @@ class TaskController extends Controller
             'description' => $input['description'],
             'status' => $input['status'],
             'deadline' => $input['deadline'],
-            'demand_id' => $input['demand_id'],
+            'customer_id' => $input['customer_id'],
+            'teams_ids' => $input['teams_ids'],
             'created_by' => auth()->user()->id
         ]);
 
