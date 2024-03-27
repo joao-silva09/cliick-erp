@@ -24,7 +24,7 @@ class CustomerRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'between:2,100'],
             'email' => ['required', 'string', 'email'],
-            'phone' => ['required', 'string',],
+            'phone' => ['required', 'string'],
             'entry_date' => ['required', 'date'],
             'company_id' => ['required', 'int', 'exists:companies,id'],
         ];
