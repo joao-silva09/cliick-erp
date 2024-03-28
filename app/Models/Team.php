@@ -22,9 +22,9 @@ class Team extends Model
         return $this->belongsTo(Company::class);
     }
     
-    public function demands()
+    public function tasks()
     {
-        return $this->belongsToMany(Demand::class);
+        return $this->belongsToMany(Task::class);
     }
 
     public function users()
