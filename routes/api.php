@@ -69,7 +69,6 @@ Route::group(['prefix' => '/tasks'], function () {
     Route::put('', [TaskController::class, 'update']);
     Route::delete('{task}', [TaskController::class, 'destroy']);
 });
-Route::apiResource('/tasks', TaskController::class);
 Route::apiResource('/expenses', ExpenseController::class);
 Route::prefix('me')->group(function() {
     Route::get('', [MeController::class, 'index']);
