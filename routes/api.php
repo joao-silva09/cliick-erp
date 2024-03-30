@@ -61,6 +61,8 @@ Route::group(['prefix' => '/messages'], function () {
 });
 Route::group(['prefix' => '/tasks'], function () {
     Route::get('', [TaskController::class, 'index']);
+    Route::get('team/{team}', [TaskController::class, 'getByTeam']);
+    Route::get('customer/{customer}', [TaskController::class, 'getByCustomer']);
     Route::get('completed-tasks', [TaskController::class, 'completedTasks']);
     Route::post('{task}/complete', [TaskController::class, 'complete']);
     Route::post('{task}/request-approval', [TaskController::class, 'requestApproval']);
