@@ -31,6 +31,39 @@ class TaskController extends Controller
             ->sortBy('deadline')
         );
     }
+    
+    /**
+     * Display a listing of the resource.
+     */
+    public function getByTeam(Team $team)
+    {
+        // $demands = Demand::whereHas('teams', function ($query) use ($team) {
+        //     $query->where('team_id', $team->id);
+        // })->get();
+        // // $demands = Demand::with('customer')->get();
+        // return DemandResource::collection($demands
+        //     ->load('customer')
+        //     ->load('tasks')
+        //     ->load('teams')
+        //     ->load('tasks.users')
+        // );
+
+        return new TeamResource($team
+            ->load('tasks.customer')
+        );
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function getByCustomer(Customer $customer)
+    {
+        // $demands = Demand::where('customer_id', $customer->id)->get();
+        // $demands = Demand::with('customer')->get();
+        return new CustomerResource($customer
+            ->load('tasks.teams')
+        );
+    }
 
     /**
      * Display a listing of the resource.
