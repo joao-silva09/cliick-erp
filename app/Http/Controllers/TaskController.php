@@ -40,7 +40,7 @@ class TaskController extends Controller
         $tasks = auth()->user()->tasks;
 
         return TaskResource::collection($tasks
-            ->load('demand.customer')
+            ->load('customer')
             ->where('status', 'Concluído')
             ->sortBy('deadline')
         );
