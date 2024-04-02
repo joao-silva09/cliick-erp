@@ -22,7 +22,7 @@ class TaskResource extends JsonResource
             'status' => $this->status,
             'created_at' => $this->created_at->format('d/m/Y'),
             'customer' => new CustomerResource($this->whenLoaded('customer')),
-            'team' => new TeamResource($this->team),
+            'teams' => TeamResource::collection($this->whenLoaded('teams')),
             'users' => UserResource::collection($this->whenLoaded('users')),
             'messages' => MessageResource::collection($this->whenLoaded('messages')),
             'created_by' => ($this->whenLoaded('user', function() {
