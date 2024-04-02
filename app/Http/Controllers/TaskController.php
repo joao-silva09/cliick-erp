@@ -140,9 +140,13 @@ class TaskController extends Controller
             'deadline' => $input['deadline'],
             'customer_id' => $input['customer_id'],
             'teams_ids' => $input['teams_ids'],
+            'users_ids' => $input['users_ids'],
             'created_by' => auth()->user()->id
         ]);
 
+        $task->save();
+        $teamsIds = $input['teams_ids']; 
+        $task->teams()->sync($teamsIds);
         
         $task->save();
         $usersIds = $input['users_ids']; 
