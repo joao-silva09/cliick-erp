@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ExpenseRequest;
+use App\Http\Resources\ExpenseResource;
 use App\Models\Company;
 use App\Models\Expense;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class ExpenseController extends Controller
             $company->save();
         }
 
-        return response($expense->with('company')->get());
+        return new ExpenseResource($expense->load('company'));
         // $company = Company::find($request->company_id);
         // return response(Expense::create($request->all()), 201);
     }
