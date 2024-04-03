@@ -19,7 +19,7 @@ class ExpenseResource extends JsonResource
             'description' => $this->description,
             'value' => $this->value,
             'paid_at' => $this->paid_at,
-            'company' => $this->whenLoaded('company')
+            'company' => new CompanyResource($this->whenLoaded('company'))
         ];
     }
 }
