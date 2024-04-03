@@ -18,7 +18,8 @@ class MeController extends Controller
     }
     public function index()
     {
-        return new UserResource(auth()->user());
+        $user = auth()->user();
+        return new UserResource($user->load('company'));
     }
 
     public function all()
