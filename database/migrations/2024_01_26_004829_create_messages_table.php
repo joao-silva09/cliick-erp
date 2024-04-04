@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('message_type');
             $table->unsignedBigInteger('task_id');
             $table->foreign('task_id')->references('id')->on('tasks');
+            $table->unsignedBigInteger('sent_by');
+            $table->foreign('sent_by')->references('id')->on('users');
             $table->timestamps();
         });
     }
