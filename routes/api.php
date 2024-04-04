@@ -54,6 +54,7 @@ Route::group(['prefix' => '/demands'], function () {
 Route::group(['prefix' => '/messages'], function () {
     Route::get('', [MessageController::class, 'index']);
     Route::get('task/{task}', [MessageController::class, 'getByTask']);
+    Route::get('user', [MessageController::class, 'getByUser']);
     Route::post('', [MessageController::class, 'store']);
     Route::get('{demand}', [MessageController::class, 'show']);
     Route::put('', [MessageController::class, 'update']);
