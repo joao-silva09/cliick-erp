@@ -41,6 +41,7 @@ class MessageController extends Controller
             'task_id' => $input['task_id'],
             'message_type' => $input['message_type'] ?? 'default',
             'username' => $user['first_name'] . ' ' . $user['last_name'],
+            'sent_by' => $user->id,
         ]);
 
         return new MessageResource($message);
