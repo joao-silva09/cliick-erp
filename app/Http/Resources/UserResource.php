@@ -23,6 +23,7 @@ class UserResource extends JsonResource
             'user_type' => (string)$this->user_type,
             'profile_photo' => (string)$this->profile_photo,
             'full_name' => $this->first_name . ' ' . $this->last_name,
+            'company' => new CompanyResource($this->whenLoaded('company'))
         ];
     }
 }
