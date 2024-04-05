@@ -6,6 +6,7 @@ use App\Http\Requests\MessageRequest;
 use App\Http\Resources\MessageResource;
 use App\Models\Message;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -26,6 +27,16 @@ class MessageController extends Controller
     {
         $messages = Message::where('task_id', $task->id)->get();
         return MessageResource::collection($messages);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function getByUser()
+    {
+        $user = auth()->user();
+        $messages = Message::where("sent_by", $user->id)->orderBy('created_at')->get();
+        return MessageResource::collection($messages->load('task'));
     }
 
     /**
