@@ -17,7 +17,7 @@ class ExpenseResource extends JsonResource
         return [
             'title' => $this->title,
             'description' => $this->description,
-            'value' => $this->value,
+            'value' => (float)$this->value,
             'paid_at' => $this->paid_at,
             'company' => new CompanyResource($this->whenLoaded('company'))
         ];
