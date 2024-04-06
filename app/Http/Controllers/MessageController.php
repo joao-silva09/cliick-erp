@@ -35,7 +35,7 @@ class MessageController extends Controller
     public function getByUser()
     {
         $user = auth()->user();
-        $messages = Message::where("sent_by", $user->id)->orderBy('created_at')->get();
+        $messages = Message::where("sent_by", $user->id)->orderBy('created_at', 'desc')->get();
         return MessageResource::collection($messages->load('task'));
     }
 
