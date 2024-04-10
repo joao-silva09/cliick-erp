@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->decimal('base_value')->nullable();
-            $table->string('recurrence')->nullable();
             $table->boolean('active');
             $table->timestamps();
         });

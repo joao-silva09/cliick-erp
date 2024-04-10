@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('service_id')->references('id')->on('services');
             $table->decimal('agreed_price');
             $table->date('service_date');
+            $table->string('recurrence')->nullable();
             $table->timestamps();
         });
     }
