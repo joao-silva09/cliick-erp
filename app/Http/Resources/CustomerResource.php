@@ -21,6 +21,7 @@ class CustomerResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
+            'customer_logo' => $this->customer_logo,
             'entry_date' => Carbon::parse($this->entry_date)->format('d/m/Y'),
             'company' => new CompanyResource($this->whenLoaded('company')),
             'tasks' => TaskResource::collection($this->whenLoaded('tasks')),
