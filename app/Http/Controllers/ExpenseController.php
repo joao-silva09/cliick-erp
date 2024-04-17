@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ExpenseRequest;
+use App\Http\Resources\CompanyResource;
 use App\Http\Resources\ExpenseResource;
 use App\Models\Company;
 use App\Models\Expense;
@@ -15,8 +16,16 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        return Expense::with('company')->paginate(10);
+        $expenses = Expense::where('company_id', 1)->get();
+        $firstExpense = $expenses->first();
+        $companyResource = $firstExpense ? new CompanyResource($firstExpense->company) : null;
+        return [
+            'expenses' => ExpenseResource::collection($expenses),
+            'company' => $companyResource,
+            'totalExpense' => $expenses->sum('value') ?? 0
+        ];
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -33,7 +42,13 @@ class ExpenseController extends Controller
             $company->save();
         }
 
-        return new ExpenseResource($expense->load('company'));
+        $expenses = Expense::where('company_id', 1)->get();
+
+        return [
+            'expense' => new ExpenseResource($expense),
+            'company' => new CompanyResource($expense->company),
+            'totalExpense' => $expenses->sum('value')
+        ];
         // $company = Company::find($request->company_id);
         // return response(Expense::create($request->all()), 201);
     }
