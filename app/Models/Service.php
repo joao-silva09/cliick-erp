@@ -13,7 +13,6 @@ class Service extends Model
         'name',
         'description',
         'base_value',
-        'recurrence',
         'active'
     ];
 
