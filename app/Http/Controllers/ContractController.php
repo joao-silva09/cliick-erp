@@ -14,7 +14,7 @@ class ContractController extends Controller
      */
     public function index()
     {
-        $contracts = Contract::all();
+        $contracts = Contract::get();
         return ContractResource::collection($contracts->load('customer')->load('services'));
     }
 
@@ -50,7 +50,11 @@ class ContractController extends Controller
     foreach ($input['services'] as $service) {
         // Aqui, você usa 'attach' para adicionar cada serviço individualmente, passando o 'id' do serviço
         // e um array com os campos extras ('agreed_price' neste caso).
-        $contract->services()->attach($service['id'], ['agreed_price' => $service['agreed_price'], 'service_date' => $service['service_date']]);
+        $contract->services()->attach($service['id'], [
+            'agreed_price' => $service['agreed_price'],
+            'recurrence' => $service['recurrence'],
+            'service_date' => $service['service_date'],
+        ]);
     }
 
 
