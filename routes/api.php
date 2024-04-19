@@ -34,15 +34,6 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::apiResource('/companies', CompanyController::class);
 Route::apiResource('/customers', CustomerController::class);
-
-Route::prefix('contracts')->group(function() {
-    Route::get('', [ContractController::class, 'index']);
-    Route::post('', [ContractController::class, 'store']);
-    Route::get('{contract}', [ContractController::class, 'show']);
-    Route::put('', [ContractController::class, 'update']);
-    Route::delete('{contract}', [ContractController::class, 'destroy']);
-});
-
 Route::prefix('teams')->group(function() {
     Route::get('', [TeamController::class, 'index']);
     Route::post('', [TeamController::class, 'store']);
@@ -88,6 +79,13 @@ Route::prefix('services')->group(function() {
     Route::get('{service}', [ServiceController::class, 'show']);
     Route::put('', [ServiceController::class, 'update']);
     Route::delete('{service}', [ServiceController::class, 'destroy']);
+});
+Route::prefix('contracts')->group(function() {
+    Route::get('', [ContractController::class, 'index']);
+    Route::post('', [ContractController::class, 'store']);
+    Route::get('{contract}', [ContractController::class, 'show']);
+    Route::put('', [ContractController::class, 'update']);
+    Route::delete('{contract}', [ContractController::class, 'destroy']);
 });
 Route::apiResource('/expenses', ExpenseController::class);
 Route::prefix('me')->group(function() {
