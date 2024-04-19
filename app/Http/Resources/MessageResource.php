@@ -21,6 +21,7 @@ class MessageResource extends JsonResource
             'message_type' => $this->message_type,
             'created_at' => $this->created_at,
             'sent_by' => new UserResource($this->whenLoaded('user')),
+            'task' => new TaskResource($this->whenLoaded('task'))
         ];
     }
 }
