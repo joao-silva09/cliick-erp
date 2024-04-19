@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ContractController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DemandController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\MeController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Http\Request;
@@ -32,6 +34,14 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::apiResource('/companies', CompanyController::class);
 Route::apiResource('/customers', CustomerController::class);
+
+Route::prefix('contracts')->group(function() {
+    Route::get('', [ContractController::class, 'index']);
+    Route::post('', [ContractController::class, 'store']);
+    Route::get('{contract}', [ContractController::class, 'show']);
+    Route::put('', [ContractController::class, 'update']);
+    Route::delete('{contract}', [ContractController::class, 'destroy']);
+});
 
 Route::prefix('teams')->group(function() {
     Route::get('', [TeamController::class, 'index']);
@@ -71,6 +81,13 @@ Route::group(['prefix' => '/tasks'], function () {
     Route::get('{task}', [TaskController::class, 'show']);
     Route::put('', [TaskController::class, 'update']);
     Route::delete('{task}', [TaskController::class, 'destroy']);
+});
+Route::prefix('services')->group(function() {
+    Route::get('', [ServiceController::class, 'index']);
+    Route::post('', [ServiceController::class, 'store']);
+    Route::get('{service}', [ServiceController::class, 'show']);
+    Route::put('', [ServiceController::class, 'update']);
+    Route::delete('{service}', [ServiceController::class, 'destroy']);
 });
 Route::apiResource('/expenses', ExpenseController::class);
 Route::prefix('me')->group(function() {
