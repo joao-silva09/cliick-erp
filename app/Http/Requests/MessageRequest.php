@@ -26,6 +26,7 @@ class MessageRequest extends FormRequest
             'username' => ['required', 'string'],
             'message_type' => ['required', 'string'],
             'task_id' => ['required', 'int', 'exists:tasks,id'],
+            // 'sent_by' => ['required', 'int', 'exists:users,id'],
         ];
     }
 }
