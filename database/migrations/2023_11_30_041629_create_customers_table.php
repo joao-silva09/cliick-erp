@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->date('entry_date');
+            $table->boolean('active');
             $table->string('customer_logo')->nullable();
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('companies');
