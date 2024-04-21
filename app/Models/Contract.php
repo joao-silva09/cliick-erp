@@ -25,4 +25,9 @@ class Contract extends Model
     {
         return $this->belongsToMany(Service::class);
     }
+
+    public function contractServices()
+    {
+        return $this->hasMany(ContractService::class);
+    }
 }
