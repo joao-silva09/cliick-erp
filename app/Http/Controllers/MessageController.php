@@ -55,7 +55,7 @@ class MessageController extends Controller
             'sent_by' => $user->id,
         ]);
 
-        return new MessageResource($message);
+        return new MessageResource($message->load('sent_by'));
     }
 
     /**
