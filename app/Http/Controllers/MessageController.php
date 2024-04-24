@@ -26,7 +26,7 @@ class MessageController extends Controller
     public function getByTask(Task $task)
     {
         $messages = Message::where('task_id', $task->id)->get();
-        return MessageResource::collection($messages);
+        return MessageResource::collection($messages->load('sent_by'));
     }
 
     /**
